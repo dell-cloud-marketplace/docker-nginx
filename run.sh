@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Copy sites-enabled content if the directory does not exist
+# Copy sites-enabled content if the directory is empty
 SITES_ENABLED="/etc/nginx/sites-enabled"
 if [ ! "$(ls -A $SITES_ENABLED)" ]; then
-    cp -r /nginx/sites-enabled/* $SITES_ENABLED
+    cp -r /sites-enabled/* $SITES_ENABLED
 fi
 
-# Start Nginx
-exec /usr/sbin/nginx
-
+# Start Supervisor
+exec supervisord -n
 
