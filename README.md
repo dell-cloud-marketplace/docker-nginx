@@ -72,8 +72,8 @@ curl http://localhost
 
 In order to replace the "Hello World" application that comes bundled with this docker image, replace the files located under **/data/www** with your website content. If you used the volume mapping option mentioned in the advanced example, you can directly copy the content of your custom application to **/data/www** on the host.
 
-### Other configuration
-For other information about how to use Nginx, such as setting up a reverse proxy, refer to the following documentation:
+### Nginx configuration
+For other information on how to use Nginx, such as setting up a reverse proxy, refer to the following documentation:
 [Nginx starting guide](http://nginx.org/en/docs/beginners_guide.html)
 
 ## Reference
