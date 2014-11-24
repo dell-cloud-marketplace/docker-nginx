@@ -1,29 +1,29 @@
-## Nginx Dockerfile
+docker-nginx
+=====================
 
+This image installs [Nginx](http://nginx.org/), a free, open-source, high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server.
 
-This repository contains **Dockerfile** of [Nginx](http://nginx.org/) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/dockerfile/nginx/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
+## Components
 
+The stack comprises the following components:
 
-### Base Docker Image
+Name            | Version                   | Description
+----------------|---------------------------|------------------------------
+RabbitMQ Server | 1.4.6                     | HTTP server & Reverse proxy
+Ubuntu          | Trusty                    | Operating system
 
-* [dockerfile/ubuntu](http://dockerfile.github.io/#/ubuntu)
+## Usage
 
+### Start the Container
 
-### Installation
+#### A. Basic Usage
 
-1. Install [Docker](https://www.docker.com/).
+Start your container with:
 
-2. Download [automated build](https://registry.hub.docker.com/u/dockerfile/nginx/) from public [Docker Hub Registry](https://registry.hub.docker.com/): `docker pull dockerfile/nginx`
-
-   (alternatively, you can build an image from Dockerfile: `docker build -t="dockerfile/nginx" github.com/dockerfile/nginx`)
-
-
-### Usage
-
-    docker run -d -p 80:80 dockerfile/nginx
+    sudo docker run -d -p 80:80 --name nginx dell/nginx
 
 #### Attach persistent/shared directories
 
-    docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/sites-enabled -v <certs-dir>:/etc/nginx/certs -v <log-dir>:/var/log/nginx dockerfile/nginx
+    sudo docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/sites-enabled -v <certs-dir>:/etc/nginx/certs -v <log-dir>:/var/log/nginx dockerfile/nginx
 
 After few seconds, open `http://<host>` to see the welcome page.
