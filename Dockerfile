@@ -16,7 +16,7 @@ ADD supervisord-nginx.conf /etc/supervisor/conf.d/supervisord-nginx.conf
 ADD sites-enabled/ /sites-enabled
 RUN rm -rf /etc/nginx/sites-enabled/*
 
-#Add Hello world app
+# Add Hello world app
 ADD /hello-world-nginx /hello-world-nginx/
 
 # Generate Self-signed certificate to enable HTTPS
@@ -32,7 +32,7 @@ RUN chmod +x /*.sh
 # Define Nginx mountable directories.
 VOLUME ["/data/www", "/etc/nginx/sites-enabled", "/var/log/nginx"]
 
-# Expose ports
+# Expose HTTP and HTTPS ports
 EXPOSE 80
 EXPOSE 443
 
