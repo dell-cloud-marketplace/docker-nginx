@@ -34,7 +34,7 @@ Start your container with:
 
 * Ports 80, 443 (Nginx) exposed
 * A named container (**nginx**)
-* Three data volumes (which will survive a restart or recreation of the container). The Nginx website configuration files are available in **/etc/nginx/sites-enabled** on the host. The Nginx application files are available in **/data/www** on the host. The Nginx log files are available in **/var/log/nginx** on the host
+* Three data volumes (which will survive a restart or recreation of the container). The Nginx website configuration files are available in **/etc/nginx/sites-enabled** on the host. The Nginx application files are available in **/data/www** on the host. The Nginx log files are available in **/var/log/nginx** on the host.
 
 As follows: 
 
@@ -53,17 +53,17 @@ dell/nginx
 By default, the container deploys a Hello world page as welcome page.
 To access the welcome page, open:
 ```no-highlight
-http://<ip address>
+http://localhost
 ```
 
-OR
+Or:
 ```no-highlight
-https://<ip address>
+https://localhost
 ```
 
 **We strongly recommend that you connect via HTTPS**, for this step, and all subsequent administrative tasks, if the container is running outside your local machine (e.g. in the Cloud). Your browser will warn you that the certificate is not trusted. If you are unclear about how to proceed, please consult your browser's documentation on how to accept the certificate.
 
-OR with cURL:
+Or with cURL:
 ```no-highlight
 curl http://localhost
 ```
