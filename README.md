@@ -72,11 +72,11 @@ curl http://localhost
 
 ### Edit Nginx configuration
 
-If you used the volume mapping optionned as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration under **/etc/nginx/sites-enabled/** on the host.
+If you used the volume mapping option as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration under **/etc/nginx/sites-enabled/** on the host.
 
 ### Loading your custom application
 
-In order to replace the "Hello World" application that comes bundled with this docker image, replace the files located under **/data/www** with your website content. If you used the volume mapping option mentioned in the advanced example, you can directly copy the content of your custom application to **/data/www** on the host.
+In order to replace the "Hello World" application that comes bundled with this docker image, replace the files located under **/data/www** with your website content. If you used the volume mapping option explained in the [Advanced Usage](#advanced-usage)e, you can directly copy the content of your custom application to **/data/www** on the host.
 
 #### Enable PHP content 
 
