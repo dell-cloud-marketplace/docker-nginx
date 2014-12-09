@@ -70,14 +70,65 @@ Or with cURL:
 curl http://localhost
 ```
 
+### Edit Nginx configuration
+
+If you used the volume mapping optionned as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration under **/etc/nginx/sites-enabled/** on the host.
+
 ### Loading your custom application
 
 In order to replace the "Hello World" application that comes bundled with this docker image, replace the files located under **/data/www** with your website content. If you used the volume mapping option mentioned in the advanced example, you can directly copy the content of your custom application to **/data/www** on the host.
 
-### Edit Nginx configuration
+#### Enable PHP content 
 
-If you used the volume mapping optionned as listed in the [Advanced Usage](#advanced-usage)), you can directly change the Nginx configuration under **/etc/nginx/sites-enabled/** on the host.
+* Login to the container using **nsenter**
+* Install **php5-fpm**
 
+```no-highlight
+apt-get install php5-fpm
+```
+* Edit the configuration file **/etc/nginx/sites-enabled/default** 
+* Add **index.php** to the index line:
+
+```no-highlight
+index index.php index.html index.htm;
+```
+* Uncomment the following lines in the PHP section:
+
+```no-highlight
+location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+
+#   # With php5-cgi alone:
+#   fastcgi_pass 127.0.0.1:9000;
+    # With php5-fpm:
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+}
+```
+* Save the configuration file
+* Create a new file info.php or copy your website content under **/data/www**
+
+```no-highlight
+echo '<?php phpinfo(); ?>' > /data/www/info.php
+```
+* Restart php5-fm
+
+```no-highlight
+service php5-fpm restart
+```
+
+* Reload Nginx configuration
+
+```no-highlight
+nginx -s reload
+```
+* Access your PHP page
+
+```no-highlight
+http://localhost/info.php (or any file of your website)
+```
 
 ### Nginx as Reverse Proxy
 
