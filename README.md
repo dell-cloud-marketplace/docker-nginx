@@ -134,6 +134,40 @@ http://localhost/info.php (or any file of your website)
 
 One of the frequent uses of Nginx is setting it up as a proxy server, which means a server that receives requests, passes them to the proxied servers, retrieves responses from them, and sends them to the clients.
 
+We will configure a basic proxy server, which serves requests of images with files from the local directory and sends all other requests to a proxied server. This latter is simple Nginx instance running on port 8080.
+
+* First, define the proxied server by adding one more server block to the nginx’s configuration file with the following contents:
+
+```no-highlight
+server {
+    listen 8080;
+    root /data/www/app;
+
+    location / {
+    }
+}
+```
+* Then modify the existing server location block as follows: 
+
+```no-highlight
+location / {
+             proxy_pass http://localhost:8080;
+        }
+
+        location ~ \.(gif|jpg|png)$ {
+            root /data/www/images;
+        }
+```
+* Reload the configuration
+
+```no-highlight
+nginx -s reload
+```
+As a result, the images have to be stored under **/data/www/images** and the rest of the content under **/data/www/app**.
+This server will filter requests ending with .gif, .jpg, or .png and map them to the **/data/www/images** directory (by adding URI to the root directive’s parameter) and pass all other requests to the proxied server configured above. 
+
+
+
 
 ### Nginx configuration
 For other information on how to use Nginx, refer to the following documentation:
