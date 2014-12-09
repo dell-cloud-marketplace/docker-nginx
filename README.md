@@ -134,7 +134,7 @@ http://localhost/info.php (or any file of your website)
 
 One of the frequent uses of Nginx is setting it up as a proxy server, which means a server that receives requests, passes them to the proxied servers, retrieves responses from them, and sends them to the clients.
 
-We will configure a basic proxy server, which serves requests of images with files from the local directory and sends all other requests to a proxied server. This latter is simple Nginx instance running on port 8080.
+We will configure a basic proxy server, which serves requests of images with files from the local directory and sends all other requests to a proxied server. This latter is a simple Nginx instance running on port 8080.
 
 * First, define the proxied server by adding one more server block to the nginx’s configuration file with the following contents:
 
@@ -158,6 +158,8 @@ location / {
             root /data/www/images;
         }
 ```
+
+**Notes:** From this point, you should have 2 **server** blocks. One that represents the proxy (running on port 80) and the second representing the proxied server (running on port 8080)
 * Reload the configuration
 
 ```no-highlight
