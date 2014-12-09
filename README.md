@@ -167,8 +167,6 @@ As a result, the images have to be stored under **/data/www/images** and the res
 This server will filter requests ending with .gif, .jpg, or .png and map them to the **/data/www/images** directory (by adding URI to the root directive’s parameter) and pass all other requests to the proxied server configured above. 
 
 
-
-
 ### Nginx configuration
 For other information on how to use Nginx, refer to the following documentation:
 [Nginx starting guide](http://nginx.org/en/docs/beginners_guide.html)
