@@ -28,6 +28,8 @@ As follows:
 ```no-highlight
 sudo docker run -d -p 80:80 -p 443:443 --name nginx dell/nginx
 ```
+
+<a name="advanced-usage"></a>
 #### B. Advanced Usage
 
 Start your container with:
@@ -72,8 +74,18 @@ curl http://localhost
 
 In order to replace the "Hello World" application that comes bundled with this docker image, replace the files located under **/data/www** with your website content. If you used the volume mapping option mentioned in the advanced example, you can directly copy the content of your custom application to **/data/www** on the host.
 
+### Edit Nginx configuration
+
+If you used the volume mapping optionned as listed in the [Advanced Usage](#advanced-usage)), you can directly change the Nginx configuration under **/etc/nginx/sites-enabled/** on the host.
+
+
+### Nginx as Reverse Proxy
+
+One of the frequent uses of Nginx is setting it up as a proxy server, which means a server that receives requests, passes them to the proxied servers, retrieves responses from them, and sends them to the clients.
+
+
 ### Nginx configuration
-For other information on how to use Nginx, such as setting up a reverse proxy, refer to the following documentation:
+For other information on how to use Nginx, refer to the following documentation:
 [Nginx starting guide](http://nginx.org/en/docs/beginners_guide.html)
 
 ## Reference
