@@ -150,7 +150,11 @@ server {
 * Then modify the existing server location block as follows: 
 
 ```no-highlight
-location / {
+server {
+        listen 80 default_server;
+        ....
+        
+        location / {
              proxy_pass http://localhost:8080;
         }
 
