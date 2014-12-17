@@ -63,7 +63,7 @@ curl http://<ip address>
 
 ### 3. Edit the Nginx Configuration
 
-If you used the volume mapping option as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration via **/etc/nginx/sites-enabled/default** on the host. To restart Nginx, enter the container using [nsenter](#nsenter), and do:
+If you used the volume mapping option as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration via **/etc/nginx/sites-enabled/default** on the host. To reload the configuration, enter the container using [nsenter](#nsenter), and do:
 
 ```no-highlight
 nginx -s reload
