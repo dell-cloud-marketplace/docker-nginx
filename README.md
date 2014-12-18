@@ -17,12 +17,12 @@ Ubuntu      | Trusty        | Operating system
 
 #### A. Basic Usage
 
-Start your container with:
+To start your container with:
 
 * Ports 80, 443 exposed
 * A named container (**nginx**)
 
-As follows: 
+Do: 
 
 ```no-highlight
 sudo docker run -d -p 80:80 -p 443:443 --name nginx dell/nginx
@@ -33,7 +33,7 @@ sudo docker run -d -p 80:80 -p 443:443 --name nginx dell/nginx
 
 To start your container with:
 
-* Ports 80, 443 (Nginx) exposed
+* Ports 80, 443 exposed
 * A named container (**nginx**)
 * Three data volumes on the host (which will survive a restart or recreation of the container). The Nginx website configuration files are available in **/etc/nginx/sites-enabled**, the application files in **/data/www**, and the Nginx log files in **/var/log/nginx**.
 
