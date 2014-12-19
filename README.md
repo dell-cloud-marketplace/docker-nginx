@@ -63,7 +63,7 @@ curl http://<ip address>
 
 ### 3. Edit the Nginx Configuration
 
-If you used the volume mapping option as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration via **/etc/nginx/sites-enabled/default** on the host. To reload the configuration, enter the container using [nsenter](#nsenter), and do:
+If you used the volume mapping option as listed in the [Advanced Usage](#advanced-usage), you can directly change the Nginx configuration via **/etc/nginx/sites-enabled/default** on the host. To reload the configuration, enter the container using [nsenter](https://github.com/dell-cloud-marketplace/additional-documentation/blob/master/nsenter.md), and do:
 
 ```no-highlight
 nginx -s reload
@@ -75,7 +75,7 @@ You can replace the default "Hello World" application, located under **/data/www
 
 ### Example: Enable PHP
 
-Enter the container using [nsenter](#nsenter), and install **php5-fpm**:
+Enter the container using [nsenter](https://github.com/dell-cloud-marketplace/additional-documentation/blob/master/nsenter.md), and install **php5-fpm**:
 
 ```no-highlight
 apt-get install php5-fpm
@@ -157,7 +157,7 @@ server {
 }
 ```
 
-Next, enter the container using [nsenter](#nsenter), and reload the configuration:
+Next, enter the container using [nsenter](https://github.com/dell-cloud-marketplace/additional-documentation/blob/master/nsenter.md), and reload the configuration:
 
 ```no-highlight
 nginx -s reload
@@ -166,45 +166,6 @@ nginx -s reload
 Images should be stored under **/data/www/images** and the rest of the content under **/data/www/app**.
 
 This server will filter requests ending with .gif, .jpg, or .png and map them to the **/data/www/images** directory and pass all other requests to the proxied site. 
-
-<a name="nsenter"></a>
-## nsenter
-[nsenter](https://github.com/jpetazzo/nsenter) is a utility which lets you enter into a Docker container from the host.
-
-First, create file **install.sh** with the following contents:
-
-```no-highlight
-apt-get install -y build-essential
-curl https://www.kernel.org/pub/linux/utils/util-linux/v2.24/util-linux-2.24.tar.gz \
-| tar -zxf-
-cd util-linux-2.24
-./configure --without-ncurses
-make nsenter
-cp nsenter /usr/local/bin
-```
-
-Next, do:
-
-```no-highlight
-chmod +x install.sh
-sudo ./install.sh
-```
-
-Find the id of your container via ```sudo docker ps```. The output (truncated to the left of the screen), should look something like this:
-
-```no-highlight
-CONTAINER ID        IMAGE               COMMAND 
-49ad89e9cc57        dell/<image name>   "/run.sh"      
-```
-
-Assuming, for example, a container ID of **49ad89e9cc57**, please do:
-
-```no-highlight
-PID=$(sudo docker inspect --format '{{.State.Pid}}' 49ad89e9cc57); \
-sudo nsenter --target $PID --mount --uts --ipc --net --pid
-```
-
-You should now be in the container, as root.
 
 ## Nginx configuration
 For other information on how to use Nginx, please refer to the [Beginner’s Guide](http://nginx.org/en/docs/beginners_guide.html).
