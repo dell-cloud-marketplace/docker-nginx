@@ -1,26 +1,34 @@
 FROM ubuntu:trusty
 MAINTAINER Dell Cloud Market Place <Cloud_Marketplace@dell.com>
 
-# Set environment variable for package install
-ENV DEBIAN_FRONTEND noninteractive
+# Update existing packages.
+RUN apt-get update 
 
-# Install Nginx.
-RUN apt-get update && \
-    apt-get -y install supervisor \
+# Ensure UTF-8
+RUN locale-gen en_US.UTF-8 && \
+    dpkg-reconfigure locales && \
+    export LC_ALL=en_US.UTF-8 && \
+    export LANGUAGE=en_US.UTF-8 && \
+    export LANG=en_US.UTF-8
+
+# Install packages
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get -y install \
+        supervisor \
         openssl \
-        nginx=1.4.6-1ubuntu3.1 && \ 
+        nginx && \ 
     echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 # Add supervisor configuration and script
-ADD start-nginx.sh /start-nginx.sh
-ADD supervisord-nginx.conf /etc/supervisor/conf.d/supervisord-nginx.conf
+COPY start-nginx.sh /start-nginx.sh
+COPY supervisord-nginx.conf /etc/supervisor/conf.d/supervisord-nginx.conf
 
 # Add sites-enabled
-ADD sites-enabled/ /sites-enabled
+COPY sites-enabled/ /sites-enabled
 RUN rm -rf /etc/nginx/sites-enabled/*
 
 # Add Hello world app
-ADD /hello-world-nginx /hello-world-nginx/
+COPY /hello-world-nginx /hello-world-nginx/
 
 # Generate self-signed certificate to enable HTTPS
 RUN mkdir /etc/nginx/certs && \
@@ -29,7 +37,7 @@ RUN mkdir /etc/nginx/certs && \
        -subj '/O=Dell/OU=MarketPlace/CN=www.dell.com'
 
 # Add startup script and make it executable.
-ADD run.sh /run.sh
+COPY run.sh /run.sh
 RUN chmod +x /*.sh
 
 # Define Nginx mountable directories.
