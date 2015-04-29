@@ -18,6 +18,9 @@ RUN DEBIAN_FRONTEND=noninteractive \
         openssl \
         nginx && \ 
     echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+    
+# Clean package cache
+RUN apt-get -y clean && rm -rf /var/lib/apt/lists/*
 
 # Add supervisor configuration and script
 COPY start-nginx.sh /start-nginx.sh
