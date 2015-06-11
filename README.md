@@ -8,7 +8,7 @@ The stack comprises the following components:
 
 Name        | Version       | Description
 ------------|---------------|------------
-Nginx       | 1.4.6         | HTTP server & Reverse proxy
+Nginx       | Lastest       | HTTP server & Reverse proxy
 Ubuntu      | Trusty        | Operating system
 
 ## Usage
